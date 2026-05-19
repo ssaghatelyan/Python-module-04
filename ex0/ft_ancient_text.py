@@ -16,7 +16,6 @@ else:
         print(f"{data}")
         print("\n---")
         print(f"File '{sys.argv[1]}' closed")
-    except FileNotFoundError as e:
-        print(f"Error opening file '{name}': {e}")
-    except PermissionError as e:
-        print(f"Error opening file '{name}': {e}")
+    except (FileNotFoundError, PermissionError) as e:
+        print(f"[STDERR] Error opening file '{name}': {e}", file=sys.stderr)
+        print("Data not saved.")

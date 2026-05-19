@@ -36,7 +36,9 @@ else:
             ft1.close()
             print(f"Data saved in file '{new_file}'.")
 
-    except FileNotFoundError as e:
-        print(f"Error opening file '{name}': {e}")
-    except PermissionError as e:
-        print(f"Error opening file '{name}': {e}")
+    except (FileNotFoundError, PermissionError) as e:
+        print(f"[STDERR] Error opening file '{name}': {e}", file=sys.stderr)
+        print("Data not saved.")
+    
+    finally:
+        close()
